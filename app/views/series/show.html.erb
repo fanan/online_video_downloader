@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @series.title %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @series.url %>
+</p>
+
+<p>
+  <b>Path:</b>
+  <%= @series.path %>
+</p>
+
+<p>
+  <%= link_to 'parse', parse_series_path(@series) %>
+</p>
+
+<ul>
+<% @series.episodes.each do |episode| %>
+  <li>
+  <%= link_to episode.title, episode_path(episode.id)%>
+  </li>
+<% end %>
+</ul>
+
+
+<%= link_to 'Edit', edit_series_path(@series) %> |
+<%= link_to 'Back', series_index_path %>

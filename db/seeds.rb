@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Status.create([
+  {:name => "unstarted"},
+  {:name => "waiting"},
+  {:name => "downloading"},
+  {:name => "error"},
+  {:name => "finished"}
+])
+
+Format.create([
+  {:name => "flv"},
+  {:name => "mp4"}
+])

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  number: 0
+  episode_id: 1
+  size: 1
+  format_id: 1
+  status_id: 1
+  url: "http://mirrors.163.com/archlinux/core/os/x86_64/coreutils-8.17-3-x86_64.pkg.tar.xz"
+
+two:
+  number: 1
+  episode_id: 1
+  size: 1
+  format_id: 1
+  status_id: 1
+  url: "http://mirrors.163.com/archlinux/core/os/x86_64/db-5.3.21-1-x86_64.pkg.tar.xz"

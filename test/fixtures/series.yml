@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: "爱情公寓第三季"
+  url: "http://www.youku.com/show_page/id_z1c275062779211e0a046.html"
+  path: 
+
+two:
+  title: ""
+  url: "http://no.com"
+  path: ""
+
+

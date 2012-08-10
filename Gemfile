@@ -39,3 +39,5 @@ gem 'jquery-rails'
 #
 
 gem 'nokogiri'
+gem 'curb'
+gem 'delayed_job_active_record'

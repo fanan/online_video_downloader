@@ -1,4 +1,19 @@
 OnlineVideoDownloader::Application.routes.draw do
+
+  resources :episodes do
+    member do
+      get :parse
+      get :play
+      get :download
+    end
+  end
+
+  resources :series do
+    member do
+      get :parse
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +63,7 @@ OnlineVideoDownloader::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'series#index'
 
   # See how all your routes lay out with "rake routes"
 

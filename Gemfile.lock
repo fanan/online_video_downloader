@@ -37,6 +37,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    curb (0.8.1)
+    delayed_job (3.0.3)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.2)
+      activerecord (> 2.1.0)
+      delayed_job (~> 3.0.0)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -105,6 +111,8 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  curb
+  delayed_job_active_record
   jquery-rails
   nokogiri
   rails (= 3.2.7)
