@@ -11,6 +11,8 @@ OnlineVideoDownloader::Application.routes.draw do
   resources :series do
     member do
       get :parse
+      get :play
+      get :download
     end
   end
 

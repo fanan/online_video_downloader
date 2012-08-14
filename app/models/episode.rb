@@ -48,17 +48,29 @@ class Episode < ActiveRecord::Base
         logger.debug "after update: #{segment.inspect}"
       end
     end
-    #logger.debug self.segments.inspect
-
+    logger.debug self.segments.inspect
   end
   
 
   def download
     #parse then download
+    segments = Segment.find_all_by_episode_id(self.id)
+    if segments.empty?
+      self.parse
+      segments = Segment.find_all_by_episode_id(self.id)
+    end
+    segments.each do |segment|
+      segment.push_to_task_queue
+    end
   end
 
-  def play
-    #generate playlists
+  def playlist
+    segments = Segment.find_all_by_episode_id(self.id)
+    s = ""
+    segments.each do |segment|
+      s << "#{segment.filename}\n"
+    end
+    return s
   end
 
   protected

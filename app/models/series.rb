@@ -15,7 +15,7 @@ class Series < ActiveRecord::Base
     #The job of get the episode title will be put into the queue
     doc = Nokogiri::HTML(open self.url)
     doc.css('div#episode ul>li>a').each do |anchor|
-      ep = Episodes.new(:url=>anchor.attribute('href').value, :title=>anchor.attribute('title').value)
+      ep = Episode.new(:url=>anchor.attribute('href').value, :title=>anchor.attribute('title').value)
       if ep.save
         self.episodes << ep
       end
@@ -24,13 +24,20 @@ class Series < ActiveRecord::Base
   end
 
   def download
-    Episodes.find_by_series_id(self.id).each do |episode|
+    episodes = Episode.find_all_by_series_id(self.id)
+    logger.debug "=====================episodes: #{episodes.inspect}"
+    #Episode.find_by_series_id(self.id).each do |episode|
+    episodes.each do |episode|
       episode.download
     end
   end
 
   def play
-    #This method will generate the playlist of the series, recursively call each episode's play method
+    s = ""
+    Episode.find_by_series_id(self.id).each do |episode|
+      s << episode.playlist
+    end
+    return s
   end
 
   #protected

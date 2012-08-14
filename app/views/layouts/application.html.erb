@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OnlineVideoDownloader</title>
+  <title>优酷视频下载助手</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="hero-unit">
+    <h1>优酷视频下载助手</h1>
+    <%#<p>目前只支持优酷视频，后续会加入土豆、新浪等其他网站的支持。</p>%>
+  </div>
 
-<%= yield %>
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+          <%= yield %>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

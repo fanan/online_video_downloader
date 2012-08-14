@@ -94,7 +94,24 @@ class SeriesController < ApplicationController
         @series.episodes << ep
       end
     end
-    logger.debug "episodes: #{@series.episodes.inspect}"
     redirect_to series_path(@series)
+  end
+
+  def play
+    @series = Series.find(params[:id])
+    s = ""
+    @series.episodes.each do |episode|
+      s << episode.playlist
+    end
+    send_data(s, {:filename=>"#{@series.title}.m3u", :disposition=>"attatchment"})
+  end
+
+  def download
+    @series = Series.find(params[:id])
+    #binding.pry
+    @series.download
+    #TODO
+    #notice
+    redirect_to series_index_url
   end
 end

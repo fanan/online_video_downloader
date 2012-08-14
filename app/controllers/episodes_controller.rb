@@ -10,12 +10,13 @@ class EpisodesController < ApplicationController
   end
 
   def play
+    s = @episode.playlist
+    send_data(s, {:filename=>"#{@episode.title}.m3u", :disposition=>"attatchment"})
   end
 
   def download
-  end
-
-  def show
+    @episode.download
+    redirect_to episode_path @episode
   end
 
   def destroy
