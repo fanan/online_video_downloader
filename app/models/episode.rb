@@ -6,6 +6,43 @@ class Episode < ActiveRecord::Base
   belongs_to :series
   has_many :segments
 
+  def status
+    # 0:not parsed or parse error
+    # 1:not started
+    # 2:downloading or waiting
+    # 3:finished, can play
+    segments = Segment.find_all_by_episode_id(self.id)
+    if segments.empty?
+      return 0
+    end
+    flag = false
+    for segment in segments
+      if segment.status_id == Status.ERROR
+        flag = true
+        break
+      end
+    end
+    if flag
+      return 0
+    end
+    for segment in segments
+      if segment.status_id == Status.UNSTARTED
+        flag = true
+        break
+      end
+    end
+    if flag
+      return 1
+    end
+    for segment in segments
+      unless segment.status_id == Status.FINISHED
+        flag = true
+        break
+      end
+    end
+    return flag ? 2 : 3
+  end
+
   def parse
     #used to gather infomations
     #first, read the url, load into json
@@ -44,6 +81,9 @@ class Episode < ActiveRecord::Base
         #segment = Segment.where(:episode_id=>self.id, :number=>i)
         segment = Segment.find_by_episode_id_and_number(self.id, i)
         logger.debug "before update: #{segment.inspect}, #{segment.class}"
+        if segment.status_id == Status.ERROR
+          segment.update_column(:status_id, Status.UNSTARTED)
+        end
         segment.update_column(:url, url)
         logger.debug "after update: #{segment.inspect}"
       end
@@ -125,6 +165,7 @@ class Episode < ActiveRecord::Base
     s = "0#{s}" if s.length == 1
     return s.upcase
   end
+
 
 
 end

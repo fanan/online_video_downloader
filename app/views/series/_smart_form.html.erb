@@ -1,0 +1,27 @@
+<%= form_for(@new_series) do |f| %>
+  <% if @new_series.errors.any? %>
+    <div id="error_explanation">
+      <h2>存在以下错误:</h2>
+      <ul>
+      <% @new_series.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <%= f.hidden_field :title %>
+    <%= f.hidden_field :path %>
+    <div class="container">
+      <div class="row">
+        <div class="span7">
+        <%= f.text_field :url, :class=>'span7' %>
+        </div>
+        <div class="span1">
+        <%= f.submit :value=>'新增视频', :class=>'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

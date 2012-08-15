@@ -4,7 +4,6 @@ class Series < ActiveRecord::Base
   has_many :episodes
   has_many :segments, :through => :episodes
   
-  #validates :title, :presence => true
   validates :url, :presence => true, :uniqueness => true, :format => {:with => /^http:\/\/(www|v)\.youku\.com\//, :message => "We only support youku now, more sites will be added later!"}
 
   #before_create :unify_url

@@ -5,6 +5,7 @@ class SeriesController < ApplicationController
   # GET /series.json
   def index
     @series = Series.all
+    @new_series = Series.new
 
     respond_to do |format|
       format.html # index.html.erb

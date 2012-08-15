@@ -1,32 +1,36 @@
 <p id="notice"><%= notice %></p>
 
+<div id="basic-info">
+  <h1 class="well">
+    <%= link_to @series.title, @series.url %>
+  </h1>
 <p>
-  <b>Title:</b>
-  <%= @series.title %>
+<%= link_to '解析', parse_series_path(@series), :class=>'btn btn-danger btn-large' %>
+<%= link_to '下载', parse_series_path(@series), :class=>'btn btn-warning btn-large' %>
+<%= link_to '观看', play_series_path(@series), :class=>'btn btn-success btn-large'%>
 </p>
+<hr />
+</div>
 
-<p>
-  <b>Url:</b>
-  <%= @series.url %>
-</p>
-
-<p>
-  <b>Path:</b>
-  <%= @series.path %>
-</p>
-
-<p>
-  <%= link_to 'parse', parse_series_path(@series) %>
-</p>
-
-<ul>
+<div id="episodes" class="span8">
 <% @series.episodes.each do |episode| %>
-  <li>
-  <%= link_to episode.title, episode_path(episode.id)%>
-  </li>
+  <div class="well row">
+    <div class="span6">
+      <h2>
+        <%= link_to episode.title, episode.url%>
+      </h2>
+    </div>
+    <div id="operation" class="span2 offset6">
+      <% if episode.status <= 1 %>
+        <%= link_to '下载', download_episode_path(episode.id), :class=>'btn btn-warning btn-small'%>
+      <% end %>
+      <% if episode.status == 3 %>
+        <%= link_to '观看', play_episode_path(episode.id), :class=>'btn btn-success btn-small'%>
+      <% end %>
+      <% if episode.status == 2 %>
+        <%= link_to '查看详情', episode_path(episode.id), :class=>'btn btn-info btn-small'%>
+      <% end %>
+    </div>
+  </div>
 <% end %>
-</ul>
-
-
-<%= link_to 'Edit', edit_series_path(@series) %> |
-<%= link_to 'Back', series_index_path %>
+</div>

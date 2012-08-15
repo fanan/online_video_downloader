@@ -1,15 +1,37 @@
-<h1>
-  <%= link_to @episode.title, @episode.url %>
-</h1>
-
-<p>
-  <%= link_to 'parse', parse_episode_path(@episode) %>
-  <%= link_to 'download', download_episode_path(@episode) %>
-  <%= link_to 'play', play_episode_path(@episode) %>
-</p>
+<div class="well row">
+  <h2 class="span6">
+    <%= link_to @episode.title, @episode.url %>
+  </h2>
+  <p class="span3">
+  <% if @episode.status == 0 %>
+    <%= link_to '解析', parse_episode_path(@episode), :class=>"btn btn-danger btn-large" %>
+  <% end %>
+  <% if @episode.status == 1 %>
+    <%= link_to '下载', download_episode_path(@episode), :class=>"btn btn-warning btn-large" %>
+  <% end %>
+  <% if @episode.status == 2 %>
+    <p class="alert">下载中，请耐心等候</p>
+  <% end %>
+  <% if @episode.status == 3 %>
+    <%= link_to '观看', play_episode_path(@episode), :class=>"btn-success btn-large"%>
+  <% end %>
+  </p>
+</div>
 
 <% @episode.segments.each do |segment| %>
-  <%= debug segment %>
+  <div class="well">
+    <ul>
+      <li>
+        序号：<%= link_to segment.number, segment.url %>
+      </li>
+      <li>
+        大小：<%= segment.size %>
+      </li>
+      <li>
+        状态：<%= segment.status.name %>
+      </li>
+    </ul>
+  </div>
 <% end %>
 
 </ul>

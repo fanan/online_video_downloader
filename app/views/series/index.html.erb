@@ -1,27 +1,21 @@
-<h1>Listing series</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Url</th>
-    <th>Path</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="span12">
+<%#<%= link_to '新增', new_series_path, :class=>'btn btn-info btn-large' %>
+<%#<hr />%>
+<%= render 'smart_form' %>
+</div>
 
 <% @series.each do |series| %>
-  <tr>
-    <td><%= series.title %></td>
-    <td><%= series.url %></td>
-    <td><%= series.path %></td>
-    <td><%= link_to 'Show', series %></td>
-    <td><%= link_to 'Edit', edit_series_path(series) %></td>
-    <td><%= link_to 'Destroy', series, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <div class="span8">
+    <h2 class="well">
+      <%= link_to series.title, series %>
+    </h2>
+    <p>
+    <%#可选操作：%>
+    <%= link_to '观看', play_series_path(series), :class=>'btn btn-success' %>
+    <%= link_to '下载', download_series_path(series), :class=>'btn btn-warning' %>
+    <%= link_to '删除', series, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-danger' %>
+    <%#<%= link_to '编辑', edit_series_path(series), :class=>'btn btn-info' %>
+    </p>
+    <hr />
+  </div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Series', new_series_path %>
